@@ -1,19 +1,20 @@
 #include "Scene.h"
 #include <iostream>
+#include <iomanip>
 
 Scene::Scene(int timestamp) {
     this->timestamp = timestamp;
-    this->capacity = 10; // Initial capacity
+    this->capacity = 10;
     this->segment_count = 0;
     this->segments = new VisibleSegment[this->capacity];
 }
 
 Scene::~Scene() {
-    delete[] segments; // Free the allocated memory
+    delete[] segments;
 }
 
 void Scene::resize() {
-    capacity *= 2; // Double the capacity
+    capacity *= 2;
     VisibleSegment* new_array = new VisibleSegment[capacity];
     for (int i = 0; i < segment_count; ++i) {
         new_array[i] = segments[i];
@@ -33,10 +34,10 @@ void Scene::addSegment(int id, double start, double end) {
 }
 
 void Scene::writeScene() {
-    // Output format: S <tempo> <objeto> <inicio> <fim> [cite: 18]
     for (int i = 0; i < segment_count; ++i) {
         std::cout << "S " << timestamp << " "
                   << segments[i].object_id << " "
+                  << std::fixed << std::setprecision(2)
                   << segments[i].start_x << " "
                   << segments[i].end_x << std::endl;
     }

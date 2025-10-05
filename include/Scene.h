@@ -13,15 +13,12 @@ private:
     int segment_count;
     int capacity;
     int timestamp;
-
     void resize();
 
 public:
     Scene(int timestamp);
     ~Scene();
-
     void addSegment(int id, double start, double end);
-
     void writeScene();
 };
 
